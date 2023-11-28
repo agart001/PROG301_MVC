@@ -1,0 +1,84 @@
+﻿@model IEnumerable<PROG301_MVC.Models.AerialVehicle>
+
+@{
+    int GetItemIndex(object item, object model)
+    { 
+        List<object> list = new List<object>((IEnumerable<object>)model);
+
+        int index = list.IndexOf(item);
+
+        return index;
+    }
+}
+
+<h1>AVController - Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Engine)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.MaxAltitude)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.DefaultAltitudeChange)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentAltitude)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Engine.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxAltitude)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DefaultAltitudeChange)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentAltitude)
+            </td>
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = GetItemIndex(item, Model) } ) |
+                @Html.ActionLink("Details", "Details", new { id = GetItemIndex(item, Model) }) |
+                @Html.ActionLink("Delete", "Delete", new { id = GetItemIndex(item, Model) })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
